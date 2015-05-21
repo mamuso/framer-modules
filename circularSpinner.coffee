@@ -17,11 +17,6 @@
 ## cs._canvas
 
 
-# Module level variable, so we can position it afterwards
-exports._canvas = new Layer
-  backgroundColor: "none"
-_canvas = exports._canvas # shortcut
-
 # Defaults
 _id = Date.now()
 _defaultwidth = 150
@@ -34,6 +29,11 @@ _radius = null
 _arc = null
 _snap = null
 _i = 0
+
+# Module level variable, so we can position it afterwards
+exports._canvas = new Layer
+  backgroundColor: "none"
+_canvas = exports._canvas # shortcut
 
 exports.new = (_width, _height, _stroke, _colorbase, _colorspinner, _speed) ->
 
@@ -94,8 +94,12 @@ exports.new = (_width, _height, _stroke, _colorbase, _colorspinner, _speed) ->
     curve: "linear"
     repeat: 1000
 
-# Draw the angle
+exports.kill = ->
+  _canvas.destroy()
 
+
+
+# Draw the angle
 drawAngle = (angle, color, stroke) ->
   d = angle
   dr = angle-90 # make 0 degree begin at the top
